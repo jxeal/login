@@ -1,101 +1,113 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Tabs_Trigger,
+} from "@/components/ui/tabs";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [signupNext, setSignupNext] = useState(0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  return (
+    <>
+      <Tabs defaultValue="login" className="w-[400px]">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="login" onClick={() => setSignupNext(0)}>
+            Login
+          </TabsTrigger>
+          <TabsTrigger value="signup" onClick={() => setSignupNext(0)}>
+            Signup
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="login">
+          <Card>
+            <CardHeader>
+              {/* Maybe an welcome icon */}
+              <CardTitle>Welcome Back</CardTitle>
+              <CardDescription>
+                Please enter your login credentials
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="space-y-1">
+                <Label htmlFor="username">Username</Label>
+                <Input id="username" type="text" /*placeholder="@zhunxeal"*/ />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="password">Password</Label>
+                <Input id="password" type="password" />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button>Login</Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="signup">
+          {signupNext == 0 && (
+            <Card>
+              <CardHeader>
+                {/* Maybe an signup icon */}
+                <CardTitle>Hey There!</CardTitle>
+                <CardDescription>
+                  Create an account. It just takes a couple minutes!
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="space-y-1">
+                  <Label htmlFor="name">Name</Label>
+                  <Input id="name" type="text" placeholder="Zhun Xeal" />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="username">Username</Label>
+                  <Input id="username" type="text" placeholder="@zhunxeal" />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button onClick={() => setSignupNext(1)}>Next</Button>
+              </CardFooter>
+            </Card>
+          )}
+          {signupNext == 1 && (
+            <Card>
+              <CardHeader>
+                {/* Maybe an signup icon */}
+                <CardTitle>Continue</CardTitle>
+                <CardDescription>Just a few more things!</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="space-y-1">
+                  <Label htmlFor="password">Enter Password</Label>
+                  <Input id="password" type="password" />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="confirmPassword">Confirm password</Label>
+                  <Input id="confirmPassword" type="password" />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button>Next</Button>
+              </CardFooter>
+            </Card>
+          )}
+        </TabsContent>
+      </Tabs>
+    </>
   );
 }
